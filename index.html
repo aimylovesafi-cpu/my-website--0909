@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#FF006B">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --glass-color: rgba(255, 255, 255, 0.2);
+            --glass-background: linear-gradient(to bottom, var(--glass-color), #050507);
+        }
+        .glass {
+            background: var(--glass-background);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="h-screen bg-[#050507] flex justify-center items-center">
+    <div class="glass p-10 w-1/2 h-1/2 flex flex-col justify-center items-center">
+        <h1 class="text-3xl text-white mb-4">My Image Gallery</h1>
+        <div class="grid grid-cols-3 gap-4 mb-4">
+            <div class="bg-gray-200 p-4 rounded-lg">
+                <img src="https://via.placeholder.com/150" alt="Image 1" class="w-full h-full object-cover">
+            </div>
+            <div class="bg-gray-200 p-4 rounded-lg">
+                <img src="https://via.placeholder.com/150" alt="Image 2" class="w-full h-full object-cover">
+            </div>
+            <div class="bg-gray-200 p-4 rounded-lg">
+                <img src="https://via.placeholder.com/150" alt="Image 3" class="w-full h-full object-cover">
+            </div>
+            <div class="bg-gray-200 p-4 rounded-lg">
+                <img src="https://via.placeholder.com/150" alt="Image 4" class="w-full h-full object-cover">
+            </div>
+            <div class="bg-gray-200 p-4 rounded-lg">
+                <img src="https://via.placeholder.com/150" alt="Image 5" class="w-full h-full object-cover">
+            </div>
+            <div class="bg-gray-200 p-4 rounded-lg">
+                <img src="https://via.placeholder.com/150" alt="Image 6" class="w-full h-full object-cover">
+            </div>
+        </div>
+        <input type="file" id="image" class="mb-4">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="addImage()">Add Image</button>
+        <div id="images" class="mt-4"></div>
+    </div>
+
+    <script>
+        function addImage() {
+            const imageInput = document.getElementById('image');
+            const imagesDiv = document.getElementById('images');
+            const file = imageInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const image = document.createElement('img');
+                image.src = event.target.result;
+                image.classList = 'w-full h-full object-cover p-4 rounded-lg';
+                imagesDiv.appendChild(image);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script></body>
+</html>
